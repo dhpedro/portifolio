@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedro Vinícius | Portfólio Pessoal</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- RESET E VARIÁVEIS GLOBAIS --- */
+        :root {
+            --cor-primaria: #ffc107; /* Amarelo/Dourado */
+            --cor-fundo: #1a1a1a;
+            --cor-fundo-secundaria: #242424;
+            --cor-texto: #e0e0e0;
+            --cor-texto-secundario: #a0a0a0;
+            --cor-borda: #333333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--cor-fundo);
+            color: var(--cor-texto);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 80px 0;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            color: var(--cor-primaria);
+            text-align: center;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .subtitulo-secao {
+            text-align: center;
+            color: var(--cor-texto-secundario);
+            margin-bottom: 50px;
+            font-size: 1.1rem;
+        }
+        
+        /* --- CABEÇALHO E NAVEGAÇÃO --- */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 0;
+            background-color: rgba(26, 26, 26, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: background-color 0.3s;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+        }
+
+        .logo i {
+            color: var(--cor-primaria);
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--cor-texto);
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-links a::after {
+            content: '';
+            width: 0;
+            height: 2px;
+            background-color: var(--cor-primaria);
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--cor-primaria);
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+        
+        /* --- SEÇÃO INÍCIO (HERO) --- */
+        #inicio {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+        
+        .inicio-conteudo {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+        }
+
+        .inicio-texto {
+            max-width: 600px;
+        }
+
+        .inicio-texto h3 {
+            font-size: 1.5rem;
+            color: var(--cor-texto-secundario);
+        }
+        
+        .inicio-texto h1 {
+            font-size: 4rem;
+            line-height: 1.1;
+            margin: 10px 0;
+            color: white;
+        }
+
+        .inicio-texto p {
+            font-size: 1.2rem;
+            color: var(--cor-primaria);
+            font-weight: 500;
+            margin-bottom: 30px;
+        }
+
+        .social-links a {
+            color: var(--cor-texto);
+            font-size: 1.5rem;
+            margin-right: 20px;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--cor-primaria);
+        }
+
+        .inicio-imagem img {
+            max-width: 350px;
+            border-radius: 50%;
+            border: 8px solid var(--cor-fundo-secundaria);
+            box-shadow: 0 0 25px rgba(255, 193, 7, 0.2);
+        }
+
+        /* --- SEÇÃO SOBRE --- */
+        .sobre-conteudo {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+        .sobre-imagem img {
+            max-width: 300px;
+            border-radius: 10px;
+        }
+        .sobre-texto p {
+            margin-bottom: 20px;
+            color: var(--cor-texto-secundario);
+        }
+        .btn {
+            display: inline-block;
+            background-color: var(--cor-primaria);
+            color: #111;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 193, 7, 0.3);
+        }
+
+        /* --- SEÇÃO SERVIÇOS --- */
+        .servicos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .servico-card {
+            background-color: var(--cor-fundo-secundaria);
+            padding: 40px;
+            border-radius: 10px;
+            text-align: center;
+            border-bottom: 3px solid transparent;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+        .servico-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--cor-primaria);
+        }
+        .servico-card i {
+            font-size: 3rem;
+            color: var(--cor-primaria);
+            margin-bottom: 20px;
+        }
+        .servico-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: white;
+        }
+        .servico-card p {
+            color: var(--cor-texto-secundario);
+        }
+        
+        /* --- SEÇÃO HABILIDADES --- */
+        .habilidades-conteudo {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+        .habilidade-item {
+            margin-bottom: 20px;
+        }
+        .habilidade-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+        .barra-progresso {
+            width: 100%;
+            height: 10px;
+            background-color: var(--cor-fundo-secundaria);
+            border-radius: 5px;
+        }
+        .progresso {
+            height: 100%;
+            background-color: var(--cor-primaria);
+            border-radius: 5px;
+            width: 0; /* ✅ Estado inicial para animação */
+            transition: width 1.2s ease-out; /* ✅ Animação */
+        }
+
+        /* --- SEÇÃO PORTFÓLIO --- */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+        .portfolio-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s;
+        }
+        .portfolio-item:hover img {
+            transform: scale(1.1);
+        }
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+        .portfolio-overlay h3 {
+            color: white;
+            font-size: 1.4rem;
+            margin-bottom: 5px;
+        }
+        .portfolio-overlay p {
+            color: var(--cor-primaria);
+            font-size: 0.9rem;
+        }
+
+        /* --- SEÇÃO CONTATO --- */
+        .contato-conteudo {
+            display: flex;
+            gap: 50px;
+        }
+        .contato-form {
+            flex: 2;
+        }
+        .contato-info {
+            flex: 1;
+        }
+        .form-grupo {
+            margin-bottom: 20px;
+        }
+        .form-grupo input,
+        .form-grupo textarea {
+            width: 100%;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid var(--cor-borda);
+            background-color: var(--cor-fundo-secundaria);
+            color: var(--cor-texto);
+            font-size: 1rem;
+        }
+        .form-grupo input:focus,
+        .form-grupo textarea:focus {
+            outline: none;
+            border-color: var(--cor-primaria);
+        }
+        textarea {
+            resize: vertical;
+            height: 150px;
+        }
+        .contato-info-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        .contato-info-item i {
+            font-size: 1.5rem;
+            color: var(--cor-primaria);
+            width: 40px;
+        }
+        .contato-info-item p {
+            color: var(--cor-texto-secundario);
+        }
+        .contato-info-item a {
+            color: var(--cor-texto-secundario);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .contato-info-item a:hover {
+            color: var(--cor-primaria);
+        }
+
+        /* --- RODAPÉ --- */
+        .footer {
+            background-color: var(--cor-fundo-secundaria);
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 50px;
+        }
+
+        /* --- RESPONSIVIDADE --- */
+        @media (max-width: 992px) {
+            .inicio-conteudo {
+                flex-direction: column-reverse;
+                text-align: center;
+            }
+            .inicio-texto {
+                margin-top: 40px;
+            }
+            .social-links {
+                justify-content: center;
+                display: flex;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none; /* Em um projeto real, aqui entraria um menu hamburguer */
+            }
+            .inicio-texto h1 {
+                font-size: 3rem;
+            }
+            .inicio-imagem img {
+                max-width: 280px;
+            }
+            .sobre-conteudo {
+                flex-direction: column;
+                text-align: center;
+            }
+            .habilidades-conteudo {
+                grid-template-columns: 1fr;
+            }
+            .contato-conteudo {
+                flex-direction: column;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <nav class="container navbar">
+            <a href="#inicio" class="logo"><i class="fa-solid fa-code"></i> Pedro Vinícius</a>
+            <ul class="nav-links">
+                <li><a href="#inicio" class="active">Início</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#servicos">Serviços</a></li>
+                <li><a href="#habilidades">Habilidades</a></li>
+                <li><a href="#portfolio">Portfólio</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="inicio">
+            <div class="container inicio-conteudo">
+                <div class="inicio-texto">
+                    <h3>Olá, eu sou</h3>
+                    <h1>Pedro Vinícius</h1>
+                    <p>Designer Gráfico & Desenvolvedor Web</p>
+                    <div class="social-links">
+                        <a href="https://br.linkedin.com/in/pedro-vinicius-js" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://github.com/dhpedro" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="https://www.instagram.com/dhpedro1/" target="_blank"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="inicio-imagem">
+                    <img src="https://i.ibb.co/gFTwV85M/image.png" alt="Sua Foto">
+                </div>
+            </div>
+        </section>
+
+        <section id="sobre">
+            <div class="container">
+                <h2>Sobre Mim</h2>
+                <p class="subtitulo-secao">Conheça um pouco mais sobre minha jornada</p>
+                <div class="sobre-conteudo">
+                    <div class="sobre-imagem">
+                         <img src="https://i.ibb.co/gFTwV85M/image.png" alt="Sua Foto">
+                    </div>
+                    <div class="sobre-texto">
+                        <h3>Oi! Eu sou Pedro Vinícius</h3>
+                        <p>
+                            Sou um profissional apaixonado por criar soluções digitais que sejam tanto visualmente atraentes quanto funcionalmente eficientes. Com experiência em design gráfico e desenvolvimento web, busco combinar criatividade e técnica para entregar projetos de alto impacto.
+                        </p>
+                        <a href="index.html#contato" class="btn">Contratar</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="servicos">
+            <div class="container">
+                <h2>Meus Serviços</h2>
+                <p class="subtitulo-secao">O que eu posso fazer por você e seu negócio</p>
+                <div class="servicos-grid">
+                    <div class="servico-card">
+                        <i class="fas fa-palette"></i>
+                        <h3>UI/UX Design</h3>
+                        <p>Criação de interfaces intuitivas e experiências de usuário memoráveis, focadas na usabilidade e na estética.</p>
+                    </div>
+                    <div class="servico-card">
+                        <i class="fas fa-code"></i>
+                        <h3>Desenvolvimento Web</h3>
+                        <p>Desenvolvimento de sites e aplicações web responsivas, performáticas e otimizadas para os motores de busca.</p>
+                    </div>
+                    <div class="servico-card">
+                        <i class="fas fa-bullhorn"></i>
+                        <h3>Identidade Visual</h3>
+                        <p>Construção de marcas fortes e consistentes, desde a criação do logo até o manual completo da marca.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="habilidades">
+            <div class="container">
+                <h2>Minhas Habilidades</h2>
+                <p class="subtitulo-secao">Minhas competências técnicas e ferramentas</p>
+                <div class="habilidades-conteudo">
+                    <div class="habilidades-coluna">
+                        <div class="habilidade-item">
+                            <div class="habilidade-info"><span>HTML</span> <span>95%</span></div>
+                            <div class="barra-progresso"><div class="progresso" data-percent="95"></div></div>
+                        </div>
+                        <div class="habilidade-item">
+                            <div class="habilidade-info"><span>CSS & Sass</span> <span>90%</span></div>
+                            <div class="barra-progresso"><div class="progresso" data-percent="90"></div></div>
+                        </div>
+                        <div class="habilidade-item">
+                            <div class="habilidade-info"><span>JavaScript</span> <span>80%</span></div>
+                            <div class="barra-progresso"><div class="progresso" data-percent="80"></div></div>
+                        </div>
+                    </div>
+                    <div class="habilidades-coluna">
+                        <div class="habilidade-item">
+                            <div class="habilidade-info"><span>Figma & Adobe XD</span> <span>95%</span></div>
+                            <div class="barra-progresso"><div class="progresso" data-percent="95"></div></div>
+                        </div>
+                        <div class="habilidade-item">
+                            <div class="habilidade-info"><span>Photoshop & Illustrator</span> <span>85%</span></div>
+                            <div class="barra-progresso"><div class="progresso" data-percent="85"></div></div>
+                        </div>
+                        <div class="habilidade-item">
+                            <div class="habilidade-info"><span>React.js</span> <span>75%</span></div>
+                            <div class="barra-progresso"><div class="progresso" data-percent="75"></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="portfolio">
+            <div class="container">
+                <h2>Portfólio</h2>
+                <p class="subtitulo-secao">Alguns dos meus trabalhos recentes</p>
+                <div class="portfolio-grid">
+                    <a href="#portfolio" class="portfolio-item">
+                        <img src="https://gridcanvas.squareweb.app/foto2.png" alt="Projeto 1">
+                        <div class="portfolio-overlay">
+                            <h3>Criação do Pixel Hub</h3>
+                            <p>Web Design / Desenvolvimento</p>
+                        </div>
+                    </a>
+                    <a href="#portfolio" class="portfolio-item">
+                        <img src="https://media.licdn.com/dms/image/v2/D4D22AQFChTRigsHweQ/feedshare-shrink_800/feedshare-shrink_800/0/1731115163613?e=2147483647&v=beta&t=o5C-8bai2QnTNc4HfKIaFKwD6_lRf4qYHloRaTWkm0U" alt="Projeto 2">
+                        <div class="portfolio-overlay">
+                            <h3>Certificado Cloud da AWS</h3>
+                            <p>Gerenciamento de Banco de Dados AWS</p>
+                        </div>
+                    </a>
+                    <a href="#portfolio" class="portfolio-item">
+                        <img src="https://gridcanvas.squareweb.app/foto1.png" alt="Projeto 3">
+                        <div class="portfolio-overlay">
+                            <h3>Criação de um Dashboard online</h3>
+                            <p>UI/UX Design</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="contato">
+            <div class="container">
+                <h2>Entre em Contato</h2>
+                <p class="subtitulo-secao">Vamos conversar sobre seu próximo projeto</p>
+                <div class="contato-conteudo">
+                    <div class="contato-form">
+                        <form id="contactForm">
+    <div class="form-grupo">
+        <input type="text" id="nome" placeholder="Seu Nome" required>
+    </div>
+    <div class="form-grupo">
+        <input type="email" id="email" placeholder="Seu E-mail" required>
+    </div>
+    <div class="form-grupo">
+        <textarea id="mensagem" placeholder="Sua Mensagem" required></textarea>
+    </div>
+    <button type="submit" class="btn">Enviar Mensagem</button>
+</form>
+
+<script>
+    document.getElementById('contactForm').addEventListener('submit', function(event) {
+        // Previne o comportamento padrão de envio do formulário (que recarregaria a página)
+        event.preventDefault();
+
+        // URL do seu Webhook do Discord
+        const webhookURL = 'https://discord.com/api/webhooks/1416934255208173761/9D33M5Oa3XltDN0kHeIvRZYeXJF2PmmsLqoZ-iWmp-s0BovQqJyf2rD2Tgj5be7UfcAe';
+
+        // Pega os valores dos campos do formulário
+        const nome = document.getElementById('nome').value;
+        const email = document.getElementById('email').value;
+        const mensagem = document.getElementById('mensagem').value;
+
+        // Monta o objeto de dados (payload) que será enviado para o Discord
+        // Usamos "embeds" para uma formatação mais bonita da mensagem no Discord
+        const payload = {
+            embeds: [{
+                title: "Nova Mensagem do Formulário de Contato",
+                color: 3447003, // Cor azul
+                fields: [
+                    {
+                        name: "👤 Nome",
+                        value: nome,
+                        inline: true
+                    },
+                    {
+                        name: "✉️ E-mail",
+                        value: email,
+                        inline: true
+                    },
+                    {
+                        name: "📝 Mensagem",
+                        value: mensagem
+                    }
+                ],
+                timestamp: new Date().toISOString()
+            }]
+        };
+
+        // Usa a API fetch para enviar a requisição POST para o webhook
+        fetch(webhookURL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        })
+        .then(response => {
+            if (response.ok) {
+                alert('Mensagem enviada com sucesso!');
+                // Opcional: Limpa o formulário após o envio
+                document.getElementById('contactForm').reset();
+            } else {
+                alert('Ocorreu um erro ao enviar a mensagem.');
+            }
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+            alert('Ocorreu um erro ao enviar a mensagem.');
+        });
+    });
+</script>
+                    </div>
+                    <div class="contato-info">
+                        <div class="contato-info-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <p>Cotia - SP</p>
+                        </div>
+                        <div class="contato-info-item">
+                            <i class="fas fa-phone-alt"></i>
+                            <p><a href="tel:+5511960702838">+55 (11) 96070-2838</a></p>
+                        </div>
+                        <div class="contato-info-item">
+                            <i class="fas fa-envelope"></i>
+                            <p><a href="mailto:dhpedro@duck.com">dhpedro@duck.com</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Pedro Vinícius. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+
+    <script>
+        // --- ANIMAÇÃO DE FADE-IN AO ROLAR A PÁGINA ---
+        const sections = document.querySelectorAll('section');
+
+        const revealSection = function (entries, observer) {
+            const [entry] = entries;
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('visible');
+
+            // ✅ Lógica para animar as barras de habilidade quando a seção se torna visível
+            if (entry.target.id === 'habilidades') {
+                const progressBars = entry.target.querySelectorAll('.progresso');
+                progressBars.forEach(bar => {
+                    const targetWidth = bar.dataset.percent + '%';
+                    bar.style.width = targetWidth;
+                });
+            }
+
+            observer.unobserve(entry.target); // Para a animação não repetir
+        };
+
+        const sectionObserver = new IntersectionObserver(revealSection, {
+            root: null,
+            threshold: 0.15, // A seção aparece quando 15% dela está visível
+        });
+
+        sections.forEach(function (section) {
+            sectionObserver.observe(section);
+        });
+
+
+        // --- LINK ATIVO NA NAVEGAÇÃO CONFORME A ROLAGEM ---
+        const navLinks = document.querySelectorAll('.nav-links a');
+        const allSections = document.querySelectorAll('main section');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            allSections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= (sectionTop - sectionHeight / 3)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(a => {
+                a.classList.remove('active');
+                if (a.getAttribute('href').substring(1) === current) {
+                    a.classList.add('active');
+                }
+            });
+        });
+
+    </script>
+
+</body>
+</html>
